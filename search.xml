@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>csapp</title>
-    <url>/2025/03/16/csapp/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>从江西到川大网安</title>
     <url>/2025/03/15/fromJXtoSCUCSE/</url>
     <content><![CDATA[<h2 id="from-JX-to-SCUCSE"><a href="#from-JX-to-SCUCSE" class="headerlink" title="from JX to SCUCSE"></a>from JX to SCUCSE</h2><p>从江西到四川大学网络空间安全学院（cyberspacesecurityengineering）<br>engineering这个词很灵性，代表本专业的工学性，计算机科学工程属性，还有建设和研究之意。</p>
@@ -22,5 +17,10 @@
         <tag>About me</tag>
         <tag>过去或未来？</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>csapp</title>
+    <url>/2025/03/16/csapp/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
