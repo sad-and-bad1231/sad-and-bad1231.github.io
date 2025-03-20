@@ -19,25 +19,26 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="kiw1">
+    <meta name="description" content="##环境搭建 已经正式学习pwn有一会了，学会了基本操作流程，做一点点（真的是很有限的）简单题目，pwn的入门实在不能做无痛，向学长询问和看教程配置环境都用了蛮久，所以在此总结分享 ##虚拟机创建从ubuntu官网找长期支持版本下载，在vm中新建虚拟机，打开新建虚拟机向导，选择自定义，硬件兼容性不用改-&gt;安装程序网盘映像文件，设置username和password，处理器和内核数量2 1就够">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pwn">
+<meta property="og:title" content="pwn_1">
 <meta property="og:url" content="http://example.com/2025/03/20/pwn/index.html">
 <meta property="og:site_name" content="kiw1&#39;s blog">
-<meta property="og:description" content="kiw1">
+<meta property="og:description" content="##环境搭建 已经正式学习pwn有一会了，学会了基本操作流程，做一点点（真的是很有限的）简单题目，pwn的入门实在不能做无痛，向学长询问和看教程配置环境都用了蛮久，所以在此总结分享 ##虚拟机创建从ubuntu官网找长期支持版本下载，在vm中新建虚拟机，打开新建虚拟机向导，选择自定义，硬件兼容性不用改-&gt;安装程序网盘映像文件，设置username和password，处理器和内核数量2 1就够">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-20T00:53:05.000Z">
-<meta property="article:modified_time" content="2025-03-20T00:53:05.497Z">
+<meta property="article:modified_time" content="2025-03-20T01:36:41.181Z">
+<meta property="article:tag" content="-pwn -ubuntu">
 <meta name="twitter:card" content="summary">
 
 
 <link rel="canonical" href="http://example.com/2025/03/20/pwn/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/03/20/pwn/","path":"2025/03/20/pwn/","title":"pwn"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/03/20/pwn/","path":"2025/03/20/pwn/","title":"pwn_1"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>pwn | kiw1's blog</title>
+<title>pwn_1 | kiw1's blog</title>
   
 
 
@@ -123,7 +124,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -136,6 +137,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%8F%82%E8%80%83%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E3%80%91-https-hornos3-github-io-2023-02-28-ARM-pwn-E5-85-A5-E9-97-A8-1-pwn-E5-AD-A6-E4-B9-A0-E8-B7-AF-E7-BA-BF-png"><span class="nav-number">1.</span> <span class="nav-text">![可参考学习路线】{https:&#x2F;&#x2F;hornos3.github.io&#x2F;2023&#x2F;02&#x2F;28&#x2F;ARM-pwn-%E5%85%A5%E9%97%A8-1&#x2F;pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png}</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,7 +157,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -207,12 +209,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="pwn | kiw1's blog">
+      <meta itemprop="name" content="pwn_1 | kiw1's blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          pwn
+          pwn_1
         </h1>
 
         <div class="post-meta-container">
@@ -222,8 +224,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2025-03-20 08:53:05" itemprop="dateCreated datePublished" datetime="2025-03-20T08:53:05+08:00">2025-03-20</time>
+      <time title="创建时间：2025-03-20 08:53:05 / 修改时间：09:36:41" itemprop="dateCreated datePublished" datetime="2025-03-20T08:53:05+08:00">2025-03-20</time>
     </span>
 
   
@@ -249,7 +252,12 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><p>##环境搭建</p>
+<p>已经正式学习pwn有一会了，学会了基本操作流程，做一点点（真的是很有限的）简单题目，pwn的入门实在不能做无痛，向学长询问和看教程配置环境都用了蛮久，所以在此总结分享</p>
+<p>##虚拟机创建<br>从ubuntu官网找长期支持版本下载，在vm中新建虚拟机，打开新建虚拟机向导，选择自定义，硬件兼容性不用改-&gt;安装程序网盘映像文件，设置username和password，处理器和内核数量2 1就够，虚拟机内存的话一般4G就够-&gt;网络选择，对于学生党，学校的ip可能有接入限制，所以一般不选桥接网络访问外部以太网，选NAT（主机被抽象为网关，虚拟机则为其下的机器，保证开机后可以直接联网就行啦反正）-&gt;后面io控制器、磁盘类型都默认就行-&gt;然后是磁盘空间，建议大一些好（maybe60G?，后期做kernel pwn很占空间（苯人还不会），这样就创建好了虚拟机。</p>
+<p>##基本配置<br>apt软件源更新，安装vim、pwntools、pwndbg、LibcSearcher、checksec、qemu等等，pwn的工具还是比较多的，python环境的话我选择vscode+fittencode，在主机也常用的python帮手。工具安装的话我参考的是这个：<a target="_blank" rel="noopener" href="https://starrysky1004.github.io/2024/10/05/pwn-huan-jing-pei-zhi/">https://starrysky1004.github.io/2024/10/05/pwn-huan-jing-pei-zhi/</a> 这一步可以慢慢来，毕竟在使用的时候可能会发现自己忘了什么哈哈。然后是zsh+ohmyzsh来美化你的shell，毕竟好看的工具让人更有动力，参考的主要是这篇：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_72357534/article/details/135453423">https://blog.csdn.net/m0_72357534/article/details/135453423</a> 其中主题使用的是powerlevel10k，很推荐。</p>
+<p>##结语<br>这样一来，我们的pwn基本环境就配置的差不多了，还有好多好多不懂的，继续深耕……</p>
+<h2 id="可参考学习路线】-https-hornos3-github-io-2023-02-28-ARM-pwn-E5-85-A5-E9-97-A8-1-pwn-E5-AD-A6-E4-B9-A0-E8-B7-AF-E7-BA-BF-png"><a href="#可参考学习路线】-https-hornos3-github-io-2023-02-28-ARM-pwn-E5-85-A5-E9-97-A8-1-pwn-E5-AD-A6-E4-B9-A0-E8-B7-AF-E7-BA-BF-png" class="headerlink" title="![可参考学习路线】{https://hornos3.github.io/2023/02/28/ARM-pwn-%E5%85%A5%E9%97%A8-1/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png}"></a>![可参考学习路线】{<a target="_blank" rel="noopener" href="https://hornos3.github.io/2023/02/28/ARM-pwn-%E5%85%A5%E9%97%A8-1/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png%7D">https://hornos3.github.io/2023/02/28/ARM-pwn-%E5%85%A5%E9%97%A8-1/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png}</a></h2>
     </div>
 
     
@@ -257,6 +265,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pwn-ubuntu/" rel="tag"># -pwn -ubuntu</a>
+          </div>
 
         
 
