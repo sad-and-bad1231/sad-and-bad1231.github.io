@@ -11,11 +11,6 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>pwn_1</title>
-    <url>/2025/03/20/pwn/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>从江西到川大网安</title>
     <url>/2025/03/15/fromJXtoSCUCSE/</url>
     <content><![CDATA[<h2 id="from-JX-to-SCUCSE"><a href="#from-JX-to-SCUCSE" class="headerlink" title="from JX to SCUCSE"></a>from JX to SCUCSE</h2><p>从江西到四川大学网络空间安全学院（cyberspacesecurityengineering）<br>engineering这个词很灵性，代表本专业的工学性，计算机科学工程属性，还有建设和研究之意。</p>
@@ -32,5 +27,90 @@
         <tag>About me</tag>
         <tag>过去或未来？</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>动态规划</title>
+    <url>/2025/04/03/DynamicProgramming/</url>
+    <content><![CDATA[<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>动态规划作为算法设计的核心思想之一，广泛用于求解最优化问题。本文结合经典例题与个人实践理解，总结动态规划的核心思想、解题步骤及常见问题类型，帮助读者系统掌握这一方法。我们看看wiki上更正式的定义：</p>
+<ul>
+<li>动态规划（英语：Dynamic programming，简称 DP），是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。动态规划常常适用于有重叠子问题和最优子结构性质的问题。</li>
+</ul>
+<p>★ dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.</p>
+<h2 id="一、动态规划的核心思想"><a href="#一、动态规划的核心思想" class="headerlink" title="一、动态规划的核心思想"></a>一、动态规划的核心思想</h2><p>动规最核心的思想就是拆分子问题，保存好过往，减少冗余。</p>
+<h3 id="1-分治与冗余消除"><a href="#1-分治与冗余消除" class="headerlink" title="1. 分治与冗余消除"></a>1. <strong>分治与冗余消除</strong></h3><p>动态规划通过将复杂问题分解为重叠的子问题，并记录子问题的解以避免重复计算，本质是“分治思想”与“空间换时间”的结合。例如，高中期间常见的斐波那契数列，它的递归解法时间复杂度为 (O(2^n))，而动态规划则优化至了 (O(n))。</p>
+<h3 id="2-最优子结构与无后效性"><a href="#2-最优子结构与无后效性" class="headerlink" title="2. 最优子结构与无后效性"></a>2. <strong>最优子结构与无后效性</strong></h3><ul>
+<li><strong>最优子结构</strong>：问题的最优解包含子问题的最优解。例如，最大子序和中，若以 <code>dp[i]</code> 表示以第 <code>i</code> 个元素结尾的最大子数组和，则 <code>dp[i] = max(nums[i], dp[i-1] + nums[i])</code>:cite[1]:cite[3]。</li>
+<li><strong>无后效性</strong>：当前状态仅由直接前驱状态决定，与更早的历史无关。例如背包问题中，当前物品的选择仅依赖于剩余容量和前一个物品的选择。</li>
+</ul>
+<hr>
+<h2 id="二、动态规划的解题步骤"><a href="#二、动态规划的解题步骤" class="headerlink" title="二、动态规划的解题步骤"></a>二、动态规划的解题步骤</h2><h3 id="1-定义状态与边界条件"><a href="#1-定义状态与边界条件" class="headerlink" title="1. 定义状态与边界条件"></a>1. <strong>定义状态与边界条件</strong></h3><ul>
+<li><strong>状态定义</strong>：明确 <code>dp</code> 数组的含义。例如，<code>dp[i][j]</code> 可能表示字符串 <code>s[0..i]</code> 和 <code>t[0..j]</code> 的最长公共子序列长度。</li>
+<li><strong>边界条件</strong>：初始化最小子问题的解。如 <code>dp[0] = nums[0]</code>（最大子序和）或 <code>dp[0][j] = 0</code>（背包问题空容量）。</li>
+</ul>
+<h3 id="2-构建状态转移方程"><a href="#2-构建状态转移方程" class="headerlink" title="2. 构建状态转移方程"></a>2. <strong>构建状态转移方程</strong></h3><p>这是动态规划的核心，需分析当前状态如何由前驱状态推导。例如：</p>
+<ul>
+<li><strong>最长递增子序列</strong>：<code>dp[i] = max(dp[j] + 1)</code>，其中 <code>j &lt; i</code> 且 <code>nums[j] &lt; nums[i]</code></li>
+<li><strong>0-1背包问题</strong>：<code>dp[i][w] = max(dp[i-1][w], dp[i-1][w-w_i] + v_i)</code></li>
+</ul>
+<h3 id="3-选择自顶向下或自底向上"><a href="#3-选择自顶向下或自底向上" class="headerlink" title="3. 选择自顶向下或自底向上"></a>3. <strong>选择自顶向下或自底向上</strong></h3><ul>
+<li><strong>自底向上</strong>：通过循环迭代填充 <code>dp</code> 表，如最大子序和的 <code>O(n)</code> 解法。</li>
+<li><strong>自顶向下（记忆化搜索）</strong>：通俗的说就是带着备忘录去递归求解并缓存结果，适合状态转移复杂或空间受限的场景，而备忘录通常使用一个数组或者一个哈希map来充当。</li>
+</ul>
+<h3 id="4-回溯构造最优解"><a href="#4-回溯构造最优解" class="headerlink" title="4. 回溯构造最优解"></a>4. <strong>回溯构造最优解</strong></h3><p>通过记录路径或反向推导，还原具体解。例如，最长公共子序列可通过 <code>dp</code> 表反向追踪字符匹配情况。</p>
+<hr>
+<h2 id="三、经典问题与变式分析"><a href="#三、经典问题与变式分析" class="headerlink" title="三、经典问题与变式分析"></a>三、经典问题与变式分析</h2><h3 id="1-最大子段和（LeetCode-53）"><a href="#1-最大子段和（LeetCode-53）" class="headerlink" title="1. 最大子段和（LeetCode 53）"></a>1. <strong>最大子段和（LeetCode 53）</strong></h3><ul>
+<li><strong>状态定义</strong>：<code>f[i]</code> 表示以 <code>nums[i]</code> 结尾的最大子数组和。</li>
+<li><strong>状态转移</strong>：<code>f[i] = MAX(f[i - 1], dp[i-1] + nums[i])</code>。</li>
+<li><strong>优化</strong>：空间压缩至 <code>O(1)</code>，只需维护当前和与最大值。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAX(a, b) ((b) &gt; (a) ? (b) : (a))</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">maxSubArray</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span>* f = <span class="built_in">malloc</span>(numsSize * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    f[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> ans = f[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        f[i] = MAX(f[i - <span class="number">1</span>], <span class="number">0</span>) + nums[i];</span><br><span class="line">        ans = MAX(ans, f[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(f);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-背包问题"><a href="#2-背包问题" class="headerlink" title="2. 背包问题"></a>2. <strong>背包问题</strong></h3><p>0-1背包：每个物品选或不选，状态转移方程关注容量与价值的平衡810。</p>
+<p>完全背包：物品可重复选，需调整遍历顺序（如正序循环容量）5。</p>
+<p>当然还有多重背包，分组背包以及结合其他内容出的题目。</p>
+<p>推荐训练<a href="https://www.acwing.com/problem/search/1/?search_content=%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2&show_algorithm_tags=0">ACwing背包9讲</a></p>
+<ol start="3">
+<li>最长回文子串（LeetCode 5）<br>状态定义：dp[i][j] 表示子串 s[i..j] 是否为回文。</li>
+</ol>
+<p>转移方程：dp[i][j] &#x3D; (s[i] &#x3D;&#x3D; s[j]) &amp;&amp; dp[i+1][j-1]4。</p>
+<p>其他就比如状态机，划分，还有很多，都需要大量练习，</p>
+<p>四、常见误区与优化技巧</p>
+<ol>
+<li>误区<br>错误的状态定义：如将非关键因素纳入状态维度，导致复杂度爆炸。</li>
+</ol>
+<p>忽略无后效性：状态设计需保证当前决策不影响后续状态独立性。</p>
+<ol start="2">
+<li>优化技巧<br>空间压缩：滚动数组或变量替换。例如背包问题中，二维数组可优化为一维。</li>
+</ol>
+<p>剪枝与贪心结合：某些问题（如跳跃游戏）中，贪心策略可提前终止计算。</p>
+<p>五、总结与学习建议<br>动态规划的学习需从经典问题入手，逐步掌握状态设计与转移方程的构建逻辑。建议：</p>
+<p>多练习模板题：如最大子序和、背包问题、编辑距离等。</p>
+<p>画表分析：手动填充 dp 表以理解状态转移过程。</p>
+<p>结合实际问题：如资源调度、路径规划等，深化对最优子结构的理解。</p>
+<p>动态规划不仅是算法工具，更是一种思维方式。通过不断实践与反思，方能真正掌握其精髓。</p>
+<hr>
+<p><strong>参考与推荐资料</strong>  </p>
+<ul>
+<li><p><a href="https://oi-wiki.org/dp/basic/">动态规划基础 -OI Wiki</a></p>
+</li>
+<li><p><a href="http://jianshu.com/p/65f3077d8e50">动态规划问题总结 - 简书</a>:cite[1]</p>
+</li>
+<li><p><a href="https://www.cnblogs.com/Anker/archive/2013/03/15/2961725.html">《算法导论》动态规划总结 - 博客园</a>:cite[8]</p>
+</li>
+<li><p><a href="https://gitcode.com/Open-source-documentation-tutorial/bb769/?utm_source=document_gitcode&index=top&type=card&webUrl&isLogin=1">算法导论</a></p>
+</li>
+<li><p><a href="https://leetcode.cn/discuss/post/3581838/fen-xiang-gun-ti-dan-dong-tai-gui-hua-ru-007o/">灵茶山艾府leetcode题单</a><img src="https://files.mdnice.com/user/94063/e737f65d-431e-4eb2-8797-d7879cf1448d.png"></p>
+</li>
+</ul>
+<hr>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pwn_1</title>
+    <url>/2025/03/20/pwn/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
