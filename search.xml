@@ -1,9 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>AlgorithmForPrimeNums</title>
+    <title>Sieve of Eratosthenes</title>
     <url>/2025/04/03/AlgorithmForPrimeNums/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="一、质数定义"><a href="#一、质数定义" class="headerlink" title="一、质数定义"></a>一、质数定义</h1><p>质数（素数）是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。</p>
+<p>我们在很小的时候就有理论基础了，也就是耳熟能详的二三五七九，一三一十七……</p>
+<h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. <strong>定义</strong></h2><p>质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数，否则称为合数。</p>
+<h2 id="2-性质"><a href="#2-性质" class="headerlink" title="2. 性质"></a>2. <strong>性质</strong></h2><p>质数的个数是无穷的。欧几里得的《几何原本》中有一个经典的证明。它使用了证明常用的方法：反证法。具体证明如下：</p>
+<ul>
+<li>假设质数只有有限的n个，从小到大依次排列为p1，p2，……，pn，设N &#x3D; p1×p2×……×pn，那么，N是素数或者不是素数。如果为素数，则要大于p1，p2，……，pn，所以它不在那些假设的素数集合中；如果为合数，因为任何一个合数都可以分解为几个素数的积；而N和N + 1的最大公约数是1，所以不可能被p1，p2，……，pn整除，所以该合数分解得到的素因数肯定不在假设的素数集合中。因此无论该数是素数还是合数，都意味着在假设的有限个素数之外还存在着其他素数。所以原先的假设不成立。也就是说，素数有无穷多个。</li>
+</ul>
+<p>其他数学家给出了一些不同的证明。欧拉利用黎曼函数证明了全部素数的倒数之和是发散的，恩斯特·库默的证明更为简洁，哈里·弗斯滕伯格则用拓扑学加以证明。</p>
+<h2 id="3-数目计算"><a href="#3-数目计算" class="headerlink" title="3. 数目计算"></a>3. 数目计算</h2><p>尽管整个素数系统是无穷的，仍然有人会问“100，000以下有多少个素数？”，“一个随机的100位数多大可能是素数？”。素数定理可以回答此问题。</p>
+<p>1、在一个大于1的数a和它的2倍之间（即区间（a,2a]中）必存在至少一个素数。</p>
+<p>2、存在任意长度的素数等差数列。</p>
+<p>3、一个偶数可以写成两个合数之和，其中每一个合数都最多只有9个质因数。（挪威数学家布朗，1920年）</p>
+<p>4、一个偶数必定可以写成一个质数加上一个合成数，其中合数的因子个数有上界。（瑞尼，1948年）</p>
+<p>5、一个偶数必定可以写成一个质数加上一个最多由5个因子所组成的合成数。后来，有人简称这结果为（1 + 5）（中国潘承洞，1968年）</p>
+<p>6、一个充分大偶数必定可以写成一个素数加上一个最多由2个质因子所组成的合成数。简称为（1 + 2）</p>
+<h2 id="4-应用"><a href="#4-应用" class="headerlink" title="4. 应用"></a>4. 应用</h2><p>质数被广泛地应用在密码学上，所谓的公钥就是将想要传递的信息在编码时加入质数，编码之后传送给收信人，任何人收到此信息后，若没有此收信人所拥有的密钥，则解密的过程中（实为寻找素数的过程），将会因为找质数的过程（分解质因数）过久，使即使取得信息也会无意义。在汽车变速箱齿轮的设计上，相邻的两个大小齿轮齿数设计成质数，以增加两齿轮内两个相同的齿相遇啮合次数的最小公倍数，可增强耐用度减少故障。在害虫的生物生长周期与杀虫剂使用之间的关系上，杀虫剂的质数次数的使用也得到了证明。实验表明，质数次数地使用杀虫剂是最合理的：都是使用在害虫繁殖的高潮期，而且害虫很难产生抗药性。以质数形式无规律变化的导弹和鱼雷可以使敌人不易拦截。多数生物的生命周期也是质数（单位为年），这样可以最大程度地减少碰见天敌的机会。</p>
+<h1 id="二、素数算法"><a href="#二、素数算法" class="headerlink" title="二、素数算法"></a>二、素数算法</h1><p>寻找素数最朴素的方法当然是一个一个遍历，我们依次遍历每一个数，然后分别判断是否是素数。所以问题的核心又回到了判断素数上，那么怎么判断一个数是不是素数呢？</p>
+<p>素数的性质只有一个，就是只有1和它本身这两个因数，我们要判断素数也只能利用这个性质。所以可以想到，假如我们要判断n是否是素数，可以从2开始遍历到n-1，如果这n-1个数都不能整除n，那么说明n就是素数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> n != <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>显然，这个算法是可以优化的，比如当n是偶数的时候，我们根本不需要循环，除了2意外的偶数一定是合数。再比如，我们循环的上界其实也没有必要到n-1，到根号n就可以了。因为因数如果存在一定是成对出现的，如果存在小于根号n的因数，那么n除以它一定大于根号n。</p>
+<p>这个改进也很简单，稍作改动即可：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> n != <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, <span class="built_in">int</span>(math.sqrt(n) + <span class="number">1</span>)):</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> n != <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这样我们把O(n)的算法优化到了O(n*(1&#x2F;2))也算是有了很大的改进了，但是还没有结束，我们还可以继续优化。由数学定理，只有形如6n-1和6n+1的自然数可能是素数，这里的n是大于等于1的整数。</p>
+<p>这个定理乍一看好像很高级，但其实很简单，因为所有自然数都可以写成6n,6n+1,6n+2,6n+3,6n+4,6n+5这6种，其中6n,6n+2,6n+4是偶数，一定不是素数。6n+3可以写成3(2n+1)，显然也不是素数，所以只有可能6n+1和6n+5可能是素数。6n+5等价于6n-1，所以我们一般写成6n-1和6n+1。</p>
+<p>利用这个定理，我们的代码可以进一步优化：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">6</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>, <span class="number">5</span>) <span class="keyword">and</span> n <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">2</span>, <span class="number">3</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, <span class="built_in">int</span>(math.sqrt(n) + <span class="number">1</span>)):</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> n != <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然这样已经很快了，但仍然不是最优的，尤其是当我们需要寻找大量素数的时候，仍会消耗大量的时间。那么有没有什么办法可以批量查找素数呢？</p>
+<p>有的，这个方法叫做埃拉托斯特尼算法。这个名字念起来非常拗口，这是一个古希腊的名字。此人是个古希腊的大牛，是大名鼎鼎的阿基米德的好友。他虽然没有阿基米德那么出名，但是也非常非常厉害，在数学、天文学、地理学、文学、历史学等多个领域都有建树。并且还自创方法测量了地球直径、地月距离、地日距离以及黄赤交角等诸多数值。要知道他生活的年代是两千五百多年前，那时候中国还是春秋战国时期，可以想见此人有多厉害。</p>
+<h2 id="1-埃式筛法"><a href="#1-埃式筛法" class="headerlink" title="1. 埃式筛法"></a>1. 埃式筛法</h2><p>埃拉托斯特尼算法就是他发明的用来筛选素数的方法，为了方便我们一般简称为埃式筛法或者筛法。埃式筛法的思路非常简单，就是用已经筛选出来的素数去过滤所有能够被它整除的数。这些素数就像是筛子一样去过滤自然数，最后被筛剩下的数自然就是不能被前面素数整除的数，根据素数的定义，这些剩下的数也是素数。</p>
+<p>举个例子，比如我们要筛选出100以内的所有素数，我们知道2是最小的素数，我们先用2可以筛掉所有的偶数。然后往后遍历到3，3是被2筛剩下的第一个数，也是素数，我们再用3去筛除所有能被3整除的数。筛完之后我们继续往后遍历，第一个遇到的数是7，所以7也是素数，我们再重复以上的过程，直到遍历结束为止。结束的时候，我们就获得了100以内的所有素数。</p>
+<p>这个思想非常简单，理解了之后写出代码来真的很容易：</p>
+<pre><code class="language-python">def eratosthenes(n):
+    primes = []
+    is_prime = [True] * (n + 1)
+    for i in range(2, n+1):
+        if is_prime[i]:
+            primes.append(i)
+            # 用当前素数i去筛掉所有能被它整除的数
+            for j in range(i * 2, n+1, i):
+                is_prime[j] = False
+    return primes
+</code></pre>
+<p>我们来分析一下筛法的复杂度，从代码当中我们可以看到，我们一共有了两层循环，最外面一层循环固定是遍历n次。而里面的这一层循环遍历的次数一直在变化，并且它的运算次数和素数的大小相关，看起来似乎不太方便计算。实际上是可以的，根据素数分布定理以及一系列复杂的运算（相信我，你们不会感兴趣的），我们是可以得出筛法的复杂度是O(nlnlnn)<br>。</p>
+<h2 id="2-极致优化"><a href="#2-极致优化" class="headerlink" title="2. 极致优化"></a>2. 极致优化</h2><p>筛法的复杂度已经非常近似<br>了，因为即使在n很大的时候，经过两次ln的计算，也非常近似常数了，实际上在绝大多数使用场景当中，上面的算法已经足够应用了。</p>
+<p>但是仍然有大牛不知满足，继续对算法做出了优化，将其优化到了<br>的复杂度。虽然从效率上来看并没有数量级的提升，但是应用到的思想非常巧妙，值得我们学习。在我们理解这个优化之前，先来看看之前的筛法还有什么可以优化的地方。比较明显地可以看出来，对于一个合数而言，它可能会被多个素数筛去。比如38，它有2和19这两个素因数，那么它就会被置为两次False，这就带来了额外的开销，如果对于每一个合数我们只更新一次，那么是不是就能优化到O(n)线性复杂度了呢？</p>
+<p>怎么样保证每个合数只被更新一次呢？这里要用到一个定理，就是每个合数分解质因数只有的结果是唯一的。既然是唯一的，那么一定可以找到最小的质因数，如果我们能够保证一个合数只会被它最小的质因数更新为False，那么整个优化就完成了。</p>
+<p>那我们具体怎么做呢？其实也不难，我们假设整数n的最小质因数是m，那么我们用小于m的素数i乘上n可以得到一个合数。我们将这个合数消除，对于这个合数而言，i一定是它最小的质因数。因为它等于i * n，n最小的质因数是m，i 又小于m，所以i是它最小的质因数，我们用这样的方法来生成消除的合数，这样来保证每个合数只会被它最小的质因数消除。</p>
+<p>根据这一点，我们可以写出新的代码：</p>
+<pre><code class="language-python">def ertosthenes(n):
+    primes = []
+    is_prime = [True] * (n+1)
+    for i in range(2, n+1):
+        if is_prime[i]:
+            primes.append(i)
+        for j, p in enumerate(primes):
+            # 防止越界
+            if p &gt; n // i:
+                break
+            # 过滤
+   is_prime[i * p] = False
+            # 当i % p等于0的时候说明p就是i最小的质因数
+            if i % p == 0:
+                break
+                
+    return primes
+</code></pre>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h2><p>到这里，我们关于埃式筛法的介绍就告一段落了。埃式筛法的优化版本相对来说要难以记忆一些，如果记不住的话，可以就只使用优化之前的版本，两者的效率相差并不大，完全在可以接受的范围之内。</p>
+<p>筛法看着代码非常简单，但是非常重要，有了它，我们就可以在短时间内获得大量的素数，快速地获得一个素数表。有了素数表之后，很多问题就简单许多了，比如因数分解的问题，比如信息加密的问题等等。这份两千多年前的智慧，今天仍在发光。</p>
+]]></content>
+      <tags>
+        <tag>-算法 -数论</tag>
+      </tags>
   </entry>
   <entry>
     <title>DynamicProgramming</title>
