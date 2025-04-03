@@ -29,7 +29,7 @@
       </tags>
   </entry>
   <entry>
-    <title>动态规划</title>
+    <title>DynamicProgramming</title>
     <url>/2025/04/03/DynamicProgramming/</url>
     <content><![CDATA[<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>动态规划作为算法设计的核心思想之一，广泛用于求解最优化问题。本文结合经典例题与个人实践理解，总结动态规划的核心思想、解题步骤及常见问题类型，帮助读者系统掌握这一方法。我们看看wiki上更正式的定义：</p>
 <ul>
