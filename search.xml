@@ -81,6 +81,11 @@
       </tags>
   </entry>
   <entry>
+    <title>csapp</title>
+    <url>/2025/03/16/csapp/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>DynamicProgramming</title>
     <url>/2025/04/03/DynamicProgramming/</url>
     <content><![CDATA[<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>动态规划作为算法设计的核心思想之一，广泛用于求解最优化问题。本文结合经典例题与个人实践理解，总结动态规划的核心思想、解题步骤及常见问题类型，帮助读者系统掌握这一方法。我们看看wiki上更正式的定义：</p>
@@ -199,13 +204,8 @@
 <p>作者：恒等式 <br>链接：<a href="https://leetcode.cn/problems/the-skyline-problem/solutions/2128263/tian-ji-xian-wen-ti-you-xian-dui-lie-by-qhcm1/">https://leetcode.cn/problems/the-skyline-problem/solutions/2128263/tian-ji-xian-wen-ti-you-xian-dui-lie-by-qhcm1/</a> <br>来源：LeetCode</p>
 ]]></content>
       <tags>
-        <tag>-算法</tag>
+        <tag>算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>csapp</title>
-    <url>/2025/03/16/csapp/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>从江西到川大网安</title>
@@ -232,12 +232,12 @@
 <p>已经正式学习pwn有一会了，学会了基本操作流程，做一点点（真的是很有限的）简单题目，pwn的入门实在不能做无痛，向学长询问和看教程配置环境都用了蛮久，所以在此总结分享</p>
 <p>###开始搭建环境</p>
 <p>##虚拟机创建<br>从ubuntu官网找长期支持版本下载，在vm中新建虚拟机，打开新建虚拟机向导，选择自定义，硬件兼容性不用改-&gt;安装程序网盘映像文件，设置username和password，处理器和内核数量2 1就够，虚拟机内存的话一般4G就够-&gt;网络选择，对于学生党，学校的ip可能有接入限制，所以一般不选桥接网络访问外部以太网，选NAT（主机被抽象为网关，虚拟机则为其下的机器，保证开机后可以直接联网就行啦反正）-&gt;后面io控制器、磁盘类型都默认就行-&gt;然后是磁盘空间，建议大一些好（maybe60G?，后期做kernel pwn很占空间（苯人还不会），这样就创建好了虚拟机。</p>
-<p>##基本配置<br>apt软件源更新，安装vim、pwntools、pwndbg、LibcSearcher、checksec、qemu等等，pwn的工具还是比较多的，python环境的话我选择vscode+fittencode，在主机也常用的python帮手。工具安装的话我参考的是这个：<a href="https://starrysky1004.github.io/2024/10/05/pwn-huan-jing-pei-zhi/">https://starrysky1004.github.io/2024/10/05/pwn-huan-jing-pei-zhi/</a> 这一步可以慢慢来，毕竟在使用的时候可能会发现自己忘了什么哈哈。然后是zsh+ohmyzsh来美化你的shell，毕竟好看的工具让人更有动力，参考的主要是这篇：<a href="https://blog.csdn.net/m0_72357534/article/details/135453423">https://blog.csdn.net/m0_72357534/article/details/135453423</a> 其中主题使用的是powerlevel10k，很推荐。</p>
-<p>![可参考学习路线]{<a href="https://hornos3.github.io/2023/02/28/ARM-pwn-%E5%85%A5%E9%97%A8-1/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png=">https://hornos3.github.io/2023/02/28/ARM-pwn-%E5%85%A5%E9%97%A8-1/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png=</a> 150x150}</p>
+<p>##基本配置<br>apt软件源更新，安装vim、pwntools、pwndbg、LibcSearcher、checksec、qemu等等，pwn的工具还是比较多的，python环境的话我选择vscode+fittencode，在主机也常用的python帮手。<br>工具安装的话我参考的是这个：<a href="https://starrysky1004.github.io/2024/10/05/pwn-huan-jing-pei-zhi/">https://starrysky1004.github.io/2024/10/05/pwn-huan-jing-pei-zhi/</a> 这一步可以慢慢来，毕竟在使用的时候可能会发现自己忘了什么哈哈。<br>然后是zsh+ohmyzsh来美化你的shell，毕竟好看的工具让人更有动力，参考的主要是这篇：<a href="https://blog.csdn.net/m0_72357534/article/details/135453423">https://blog.csdn.net/m0_72357534/article/details/135453423</a> 其中主题使用的是powerlevel10k，很推荐。</p>
 <hr>
 ]]></content>
       <tags>
-        <tag>-pwn -ubuntu</tag>
+        <tag>pwn</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
 </search>
